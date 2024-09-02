@@ -24,9 +24,7 @@ def generateSmackTalk(matchup: Matchup) -> str:
 
     print(f"{homeTeam.team_name} vs {awayTeam.team_name}")
     print(f"{homeQB.name} vs {awayQB.name}")
-    response = llm.mock_quarterbacks(
-        homeTeam.team_name, homeQB.name, awayTeam.team_name, awayQB.name
-    )
+    response = llm.mock(homeTeam.team_name, homeQB, awayTeam.team_name, awayQB)
     return response.choices[0].message.content
 
 
@@ -39,11 +37,12 @@ def main():
         f"""Thoughts on {matchup.home_team.team_name} vs {matchup.away_team.team_name}:
             {generateSmackTalk(matchup)}
         """
-        for matchup in nfl2024.box_scores()[:1]
+        for matchup in nfl2024.box_scores()[5:]
     ]
     print(smacktalk)
 
-    with open("analysis.txt", "w") as f:
+    with open("analysis.txt", "w+") as f:
+        f.write("Week 1\n============================\n\n")
         for line in smacktalk:
             f.write(line + "\n\n")
 
