@@ -6,7 +6,7 @@ import env
 import llm
 
 
-from espn_api.football import League, BoxPlayer
+from espn_api.football import League, BoxPlayer, Matchup
 
 
 def findQB(players) -> Optional[BoxPlayer]:
@@ -16,13 +16,7 @@ def findQB(players) -> Optional[BoxPlayer]:
     return None
 
 
-def main():
-    nfl2024 = League(
-        league_id=env.LEAGUE_ID, year=env.YEAR, swid=env.SWID, espn_s2=env.ESPN_S2
-    )
-
-    matchup = nfl2024.box_scores()[1]
-    print(matchup)
+def generateSmackTalk(matchup: Matchup) -> str:
     homeTeam = matchup.home_team
     homeQB = findQB(matchup.home_lineup)
     awayTeam = matchup.away_team
@@ -30,9 +24,28 @@ def main():
 
     print(f"{homeTeam.team_name} vs {awayTeam.team_name}")
     print(f"{homeQB.name} vs {awayQB.name}")
-    response = llm.mock_quarterbacks(homeTeam.team_name, homeQB.name, awayTeam.team_name, awayQB.name)
-    print(response.choices[0])
+    response = llm.mock_quarterbacks(
+        homeTeam.team_name, homeQB.name, awayTeam.team_name, awayQB.name
+    )
+    return response.choices[0].message.content
 
+
+def main():
+    nfl2024 = League(
+        league_id=env.LEAGUE_ID, year=env.YEAR, swid=env.SWID, espn_s2=env.ESPN_S2
+    )
+
+    smacktalk = [
+        f"""Thoughts on {matchup.home_team.team_name} vs {matchup.away_team.team_name}:
+            {generateSmackTalk(matchup)}
+        """
+        for matchup in nfl2024.box_scores()[:1]
+    ]
+    print(smacktalk)
+
+    with open("analysis.txt", "w") as f:
+        for line in smacktalk:
+            f.write(line + "\n\n")
 
 
 if __name__ == "__main__":
