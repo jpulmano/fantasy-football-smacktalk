@@ -37,7 +37,7 @@ def main():
         f"""Thoughts on {matchup.home_team.team_name} vs {matchup.away_team.team_name}:
             {generateSmackTalk(matchup)}
         """
-        for matchup in nfl2024.box_scores()[5:]
+        for matchup in nfl2024.box_scores()
     ]
     print(smacktalk)
 
