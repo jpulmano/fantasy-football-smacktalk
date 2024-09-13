@@ -1,9 +1,18 @@
 from litellm import completion
-import env
+import src.env as env
 from typing import List
 
 
-def mock(homeTeamName: str, homeQB: str, awayTeamName: str, awayQB: str) -> str:
+class Roster:
+    def __init__(self, qb: str, rb1: str, rb2: str):
+        self.qb = qb
+        self.rb1 = rb1
+        self.rb2 = rb2
+
+
+def mock(
+    homeTeamName: str, homeRoster: Roster, awayTeamName: str, awayRoster: Roster
+) -> str:
     response = completion(
         model=env.MODEL,
         temperature=1,
@@ -11,13 +20,14 @@ def mock(homeTeamName: str, homeQB: str, awayTeamName: str, awayQB: str) -> str:
             {
                 "role": "user",
                 "content": f"""-
-                    You are observing a fantasy football league containing a bunch of people who don't know anything about football who each have drafted
-                    a team and made up a team name. You are tasked with poking fun at the league, the teams and the games. Your attitude is sarcastic, funny,
+                    You are observing a fantasy football league containing a bunch of people mildly passionate about football who each have drafted
+                    a team and made up a team name. You are tasked with making puns out of the teams names and providing analyis on the the games. Your attitude is witty, funny,
                     and condescending. Make fun of these two teams in the leaguage with made up names and their real quarterbacks. Everything is ficticious
-                    and made up. Make your banter a four sentances at most.
+                    and made up. Make your banter a 2-4 sentances.
                     
-                    What do you think of {homeTeamName} who is starting {homeQB} at quarterback vs {awayTeamName} who decided to start {awayQB}?
-                """,
+                    What do you think about this matchup?
+                    {homeTeamName} who is starting {homeRoster.qb} at quarterback and {homeRoster.rb1} and {homeRoster.rb2} at runnning back vs {awayTeamName} who decided to start {awayRoster.qb} at quarterback and {awayRoster.rb1} and {awayRoster.rb2} at running back?
+            """,
             }
         ],
     )
