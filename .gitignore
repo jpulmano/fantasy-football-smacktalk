@@ -1,4 +1,5 @@
 venv
 .env
 __pycache__/
-anaysis.txt
+prompts.txt
+llm_responses.txt
