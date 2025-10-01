@@ -54,14 +54,13 @@ def main() -> None:
     # Save prompts
     with open("prompts.txt", "w+", encoding="utf-8") as f:
         for line in prompts:
-            f.write(line + "\n\n")
+            f.write(line + "\n\n" + "-" * 80 + "\n")
 
     print("Prompts saved to prompts.txt")
 
     # Save LLM responses if enabled
     if should_query_llm:
         with open("llm_responses.txt", "w+", encoding="utf-8") as f:
-            f.write(f"Week {env.WEEK}\n============================\n\n")
             for line in responses:
                 f.write(line + "\n\n")
 

@@ -19,42 +19,32 @@ class FantasyTeam:
     wr1: BoxPlayer
     wr2: BoxPlayer
     te1: BoxPlayer
+    flex: Optional[BoxPlayer] = None
 
 
 def findQB(players: List[BoxPlayer]) -> Optional[BoxPlayer]:
-    """Return the QB from the given lineup, if any."""
     return next((p for p in players if p.slot_position == "QB"), None)
 
 
 def findRBs(players: List[BoxPlayer]) -> List[BoxPlayer]:
-    """Return all RBs from the given lineup."""
+    # Only count "true" RB slots, not FLEX
     return [p for p in players if p.slot_position == "RB"]
 
 
 def findWRs(players: List[BoxPlayer]) -> List[BoxPlayer]:
-    """Return all WRs from the given lineup."""
     return [p for p in players if p.slot_position == "WR"]
 
 
 def findTE(players: List[BoxPlayer]) -> Optional[BoxPlayer]:
-    """Return the TE from the given lineup, if any."""
     return next((p for p in players if p.slot_position == "TE"), None)
 
 
+def findFlex(players: List[BoxPlayer]) -> Optional[BoxPlayer]:
+    """Return the FLEX player from the given lineup, if any."""
+    return next((p for p in players if p.slot_position in ("RB/WR/TE", "FLEX")), None)
+
+
 def getFantasyTeam(matchup: Matchup, team_type: str) -> FantasyTeam:
-    """
-    Extracts a FantasyTeam object from a matchup.
-    
-    Args:
-        matchup: The ESPN API matchup object.
-        team_type: Either "home" or "away".
-    
-    Returns:
-        A FantasyTeam with QB, 2 RBs, 2 WRs, and 1 TE.
-    
-    Raises:
-        AssertionError: If required positions are missing.
-    """
     assert team_type in ("home", "away")
 
     lineup = matchup.home_lineup if team_type == "home" else matchup.away_lineup
@@ -66,6 +56,7 @@ def getFantasyTeam(matchup: Matchup, team_type: str) -> FantasyTeam:
     rbs = findRBs(lineup)
     wrs = findWRs(lineup)
     te1 = findTE(lineup)
+    flex = findFlex(lineup)
 
     # Sanity checks
     assert qb, "QB not found in lineup"
@@ -81,4 +72,5 @@ def getFantasyTeam(matchup: Matchup, team_type: str) -> FantasyTeam:
         wr1=wrs[0],
         wr2=wrs[1],
         te1=te1,
+        flex=flex,
     )
