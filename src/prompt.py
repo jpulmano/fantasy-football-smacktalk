@@ -7,8 +7,8 @@ Tone and Style Guidelines:
 
 Structure (stick to this flow):
 - Intro (1-2 sentences): General hype + preview of the matchup.
-- Team A (3 sentences): Roast/analyze up to 3 key players (prioritize the star players among the QB, RBs, WRs, and FLEX)
-- Team B (3 sentences): Roast/analyze up to 3 key players (prioritize the star players among the QB, RBs, WRs, and FLEX)
+- Team A (3 sentences): Analyze up to 2 key players (prioritize the star players among the QB, RBs, WRs, and FLEX). You may ROAST or GLAZE.
+- Team B (3 sentences): Analyze up to 2 key players (prioritize the star players among the QB, RBs, WRs, and FLEX). You may ROAST or GLAZE.
 - Prediction (1-2 sentences): State who's projected to win based on ESPN projections, roast the underdog, and hint at upset potential, if any.
 
 Other Rules:
@@ -24,4 +24,7 @@ Matchup:
 VERSUS
 
 {team_two}
+
+Additional notes:
+- Skatteballers is a play on Skattebo's name. Skattebo + Ballers
 """
