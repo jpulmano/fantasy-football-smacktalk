@@ -38,18 +38,17 @@ def main() -> None:
 
     for matchup in league.box_scores():
         prompt = generateSmackTalkPrompt(matchup)
-        header = f"Matchup: {matchup.home_team.team_name} vs {matchup.away_team.team_name}"
 
         # Save the prompt
-        prompts.append(f"{header}\n{prompt}")
+        prompts.append(f"{prompt}")
 
         # Optionally query LLM
         if should_query_llm:
             try:
                 result = llm.query_llm(prompt)
-                responses.append(f"{header}\n{result}")
+                responses.append(f"{result}")
             except Exception as e:
-                responses.append(f"{header}\nError querying LLM: {e}")
+                responses.append(f"Error querying LLM: {e}")
 
     # Save prompts
     with open("prompts.txt", "w+", encoding="utf-8") as f:

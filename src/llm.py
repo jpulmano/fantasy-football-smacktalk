@@ -27,20 +27,20 @@ def build_prompt(home_team: FantasyTeam, away_team: FantasyTeam) -> str:
         lines.append(f"TOTAL TEAM PROJECTION: {team.total_proj:.1f} points")
         return "\n".join(lines)
 
-    return f"""You are observing a fantasy football league containing mildly passionate and competitive players in a work league.
+    return f"""You are observing a fantasy football league containing passionate and competitive players.
 
-You will be given a matchup between 2 coworkers and the players on each team. Your task is to create a 4-8 sentence summary of the matchup in a funny, goofy, roasting, casual tone to create excitement about the matchup.
+You will be given a matchup between 2 people and the players on each team. Your task is to create a 4-8 sentence summary of the matchup in a funny, goofy, roasting, casual tone to create excitement about the matchup.
 
 You MUST:
-- Look up important, recent news about each player to inform your roasts. For example, if a given player scored 2.0 points last week, you should roast this and say something along the lines of "this player sucked last week and will probably suck this week".
-- Look up the teams that each player is up against. For instance, if a running back is up against a team with a great running defense, then you should add this to your roast.
+- Keep your roasts silly, witty, and condescending. They should make the reader laugh.
+- Keep your analysis more high-level, and do not get TOO hyper-focused on statlines or individual players.
+    - HOWEVER, you *should* look up important, recent news about each player to inform your roasts. For example, if a given player scored 2.0 points last week, you should roast this and say something along the lines of "this player sucked last week and will probably suck this week". Etc.
+    - Look up the teams that each player is up against. For instance, if a running back is up against a team with a great running defense, then you should add this to your roast. But do not get too hyper-focused on these matchups.
+    - In your summary, you should use a maximum of 2-3 players to analyze per team, without trying to include analysis about every single player.
+    - You may cite any sources at the END of the summary; do not include your sources in-line.
 - Use ESPN projected points (provided below).
-- Whether players are OUT, QUESTIONABLE, or on a BYE (also provided).
-For example, if a player is projected 0 because they are injured or on bye, call this out in a roasting way.
-
-Additionally:
 - Make funny puns out of the team names.
-- Provide witty, condescending analysis.
+- Don't focus too much on the defenses.
 
 Matchup:
 

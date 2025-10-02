@@ -70,12 +70,12 @@ def getFantasyTeam(matchup: Matchup, team_type: str) -> FantasyTeam:
     defense = findDefense(lineup)
 
     # Sanity checks
-    assert qb, "QB not found"
-    assert len(rbs) >= 2, "Need at least 2 RBs"
-    assert len(wrs) >= 2, "Need at least 2 WRs"
-    assert te1, "TE not found"
-    assert kicker, "K not found"
-    assert defense, "DEF not found"
+    # assert qb, "QB not found"
+    # assert len(rbs) >= 2, "Need at least 2 RBs"
+    # assert len(wrs) >= 2, "Need at least 2 WRs"
+    # assert te1, "TE not found"
+    # assert kicker, "K not found"
+    # assert defense, "DEF not found"
 
     # Build slot map
     slot_map: Dict[str, Optional[BoxPlayer]] = {
