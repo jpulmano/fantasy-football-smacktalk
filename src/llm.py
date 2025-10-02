@@ -23,7 +23,7 @@ def build_prompt(home_team: FantasyTeam, away_team: FantasyTeam) -> str:
             status = info.get("status", "not found")
             player_name = player.name if player else "None"
             lines.append(
-                f"{slot}: {player_name} ({proj:.1f} projed points, status={status})"
+                f"{slot}: {player_name} ({proj:.1f} projected points, status={status})"
             )
         lines.append(f"TOTAL TEAM PROJECTION: {team.total_proj:.1f} points")
         return "\n".join(lines)
